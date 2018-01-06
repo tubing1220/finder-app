@@ -23,7 +23,7 @@ public abstract  class HttpCallback<T extends Result> implements Callback<T> {
             if(code == CODE_SUCCESS){
                 onResponse(response.body());
             } else{
-                onFailure(code, response.body().getDesc());
+                onFailure(code, response.body().getMsg());
             }
         }
     }

@@ -3,6 +3,7 @@ package com.zjf.finder.biz.home.service;
 import com.zjf.finder.base.http.Result;
 import com.zjf.finder.base.http.Result2;
 import com.zjf.finder.biz.home.model.CategoryDetail;
+import com.zjf.finder.biz.home.model.CategoryDetailData;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ public interface NewsService {
     @GET("{type}/")
     Call<Result2> getNewsData(@Path("type") String type, @Query("key") String key, @Query("num") String num, @Query("page") int page);
 
-//    @GET("")
-//    Call<Result<List<CategoryDetail>>> getCategoryDetailList(@Query("access") String access, @Query("categoryDetail") String categoryDetail);
+    @GET("index.php")
+    Call<Result<CategoryDetailData>> getCategoryDetailList(@Query("access") String access, @Query("submit") String submit);
 
 
 //    @GET("")
