@@ -1,6 +1,10 @@
 package com.zjf.finder.biz.home.service;
 
+import com.zjf.finder.base.http.Result;
 import com.zjf.finder.base.http.Result2;
+import com.zjf.finder.biz.home.model.CategoryDetail;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,5 +19,12 @@ public interface NewsService {
 
     @GET("{type}/")
     Call<Result2> getNewsData(@Path("type") String type, @Query("key") String key, @Query("num") String num, @Query("page") int page);
+
+//    @GET("")
+//    Call<Result<List<CategoryDetail>>> getCategoryDetailList(@Query("access") String access, @Query("categoryDetail") String categoryDetail);
+
+
+//    @GET("")
+//    Call<Result<List<CategoryDetail>>> getCategoryDetailList(@Query("access") String access, @Query("categoryDetail") String categoryDetail);
 
 }
