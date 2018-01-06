@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textview"
+    <FrameLayout
+        android:id="@+id/tab_change_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello World!" />
+        android:layout_height="match_parent">
+
+
+    </FrameLayout>
 
 </LinearLayout>

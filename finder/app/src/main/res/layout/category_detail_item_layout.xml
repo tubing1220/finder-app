@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/photo"
+            android:maxLength="15"
+            android:text="昵称"
+            android:textColor="@color/color_494b58"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:maxLength="20"
+            android:text="分类名称"
+            android:textColor="@color/color_494b58"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="这里是标题"
+        android:textColor="@color/color_black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:text="昨天V2EX上的一篇通过抓包来获取微信跳一跳源码的文章走红，文章连接点击这里我也在通过文章中的方式进行了抓包，但是并未探测到小游戏的下载连接，可能微信对此已经进行了修复。而且上文中提供的下载连接也显示为404的状态码。虽然抓包未果，但是依然可以从本地将源码抽离出来，下面将介绍如何从Android手机里面找到微信下载的小游戏源码作者：骑摩托马斯链接：https: //juejin.im/post/5a4b0fc7f265da431956a2b7来源：掘金著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"
+        android:textColor="@color/color_666666"
+        android:textSize="12sp" />
+
+
+</LinearLayout>

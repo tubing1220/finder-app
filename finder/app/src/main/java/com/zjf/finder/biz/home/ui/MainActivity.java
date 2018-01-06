@@ -1,8 +1,9 @@
 package com.zjf.finder.biz.home.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zjf.finder.R;
@@ -16,17 +17,15 @@ import com.zjf.finder.constant.Constant;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView mTextView;
+    private CategoryDetailFragment mCategoryDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = findViewById(R.id.textview);
-        mTextView.setText("Ready...");
-        getData();
+        showHomePageFragment();
+//        getData();
     }
 
     private void getData(){
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Result2 result2) {
                 if(result2 != null && result2.getNewslist() != null){
                     List<News> newsList = result2.getNewslist();
-                    mTextView.setText(newsList.toString());
                 }
             }
 
@@ -46,7 +44,36 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), String.valueOf(msg), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //显示首页Fragment
+    private void showHomePageFragment() {
+        FragmentTransaction transaction = getTransaction();
+        CategoryDetailFragment categoryDetailFragmentGetByTag = (CategoryDetailFragment) getSupportFragmentManager().findFragmentByTag(CategoryDetailFragment.class.getSimpleName());
+        if (categoryDetailFragmentGetByTag == null) {
+            categoryDetailFragmentGetByTag = new CategoryDetailFragment();
+            this.mCategoryDetailFragment = categoryDetailFragmentGetByTag;
+            transaction.add(R.id.tab_change_layout, categoryDetailFragmentGetByTag, categoryDetailFragmentGetByTag.getClass().getSimpleName());
+        } else {
+            this.mCategoryDetailFragment = categoryDetailFragmentGetByTag;
+        }
+        transaction.show(this.mCategoryDetailFragment);
+        transaction.commitAllowingStateLoss();
+        FragmentManager manager = getSupportFragmentManager();
+        manager.executePendingTransactions();
+    }
+
+    private FragmentTransaction getTransaction() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        hideAllFragmengts(transaction);
+        return transaction;
+    }
 
 
+    private void hideAllFragmengts(FragmentTransaction transaction){
+        if(mCategoryDetailFragment != null){
+            transaction.hide(mCategoryDetailFragment);
+        }
     }
 }
