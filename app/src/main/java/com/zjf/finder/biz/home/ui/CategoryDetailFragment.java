@@ -1,24 +1,25 @@
 package com.zjf.finder.biz.home.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.zjf.finder.R;
+import com.zjf.finder.base.fragment.BaseFragment;
+import com.zjf.finder.base.view.CommonWebViewActivity;
 import com.zjf.finder.biz.home.adapter.CategoryDetailAdapter;
 import com.zjf.finder.biz.home.contract.CategoryDetailContract;
-import com.zjf.finder.biz.home.model.CategoryDetail;
 import com.zjf.finder.biz.home.model.News;
 import com.zjf.finder.biz.home.presenter.CategoryDetailPresenter;
 import com.zjf.finder.constant.Constant;
+import com.zjf.finder.utils.CollectionUtils;
 
 import java.util.List;
 
@@ -26,21 +27,20 @@ import java.util.List;
  * Created by zhengjunfei on 2018/1/6.
  */
 
-public class CategoryDetailFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, CategoryDetailContract.UI {
+public class CategoryDetailFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, CategoryDetailContract.UI {
     private RecyclerView mRecyclerView;
     private CategoryDetailPresenter mPresenter;
     private CategoryDetailAdapter mAdapter;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.category_detail_layout, container, false);
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.category_detail_layout;
     }
 
     private void initView(View rootView){
@@ -53,6 +53,7 @@ public class CategoryDetailFragment extends Fragment implements BaseQuickAdapter
         mRecyclerView.setLayoutManager(linearLayoutManager);
         initAdapter();
         initData();
+        initListener();
     }
 
     private void initAdapter(){
@@ -64,6 +65,28 @@ public class CategoryDetailFragment extends Fragment implements BaseQuickAdapter
 
     private void initData(){
         mPresenter.getCategoryDetailList();
+    }
+
+    private void initListener(){
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if(mAdapter != null && CollectionUtils.isValid(mAdapter.getData(), position)){
+                    News news = mAdapter.getData().get(position);
+                    String url = news.getUrl();
+                    String title = news.getTitle();
+                    startWebView(url, title);
+                }
+            }
+        });
+    }
+
+    private void startWebView(String url, String title){
+        Intent intent  = new Intent(getActivity(), CommonWebViewActivity.class);
+        intent.putExtra(Constant.CommonWebActivity.EXTRA_URL, url);
+        intent.putExtra(Constant.CommonWebActivity.EXTRA_TITLE, title);
+        startActivity(intent);
     }
 
     @Override

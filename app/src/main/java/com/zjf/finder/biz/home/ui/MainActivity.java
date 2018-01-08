@@ -3,10 +3,10 @@ package com.zjf.finder.biz.home.ui;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.zjf.finder.R;
+import com.zjf.finder.base.activity.BaseActivity;
 import com.zjf.finder.base.http.HttpCallback;
 import com.zjf.finder.base.http.HttpCallback2;
 import com.zjf.finder.base.http.Result;
@@ -20,17 +20,14 @@ import com.zjf.finder.constant.Constant;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private CategoryDetailFragment mCategoryDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         showHomePageFragment();
-
-
         getData2();
     }
 

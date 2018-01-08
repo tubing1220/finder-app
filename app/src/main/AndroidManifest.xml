@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".base.view.CommonWebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".base.activity.BaseActivity"></activity>
     </application>
 
 </manifest>
