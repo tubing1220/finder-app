@@ -17,7 +17,7 @@ public class CategoryDetailContract {
     }
 
     public interface Model{
-        void getCategoryDetailList(int page, OnListener listener);
+        void getCategoryDetailList(String category, int page, OnListener listener);
     }
 
     public interface OnListener{

@@ -25,9 +25,9 @@ public class CategoryDetailPresenter extends BasePresenter implements CategoryDe
         return getUI(CategoryDetailContract.UI.class);
     }
 
-    public void getCategoryDetailList(){
+    public void getCategoryDetailList(String category){
         if(mModel != null){
-            mModel.getCategoryDetailList(mPage++, this);
+            mModel.getCategoryDetailList(category, mPage++, this);
         }
     }
 

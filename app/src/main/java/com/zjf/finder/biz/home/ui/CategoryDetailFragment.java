@@ -16,10 +16,13 @@ import com.zjf.finder.base.fragment.BaseFragment;
 import com.zjf.finder.base.view.CommonWebViewActivity;
 import com.zjf.finder.biz.home.adapter.CategoryDetailAdapter;
 import com.zjf.finder.biz.home.contract.CategoryDetailContract;
+import com.zjf.finder.biz.home.interfaces.CategoryItem;
+import com.zjf.finder.biz.home.model.Category;
 import com.zjf.finder.biz.home.model.News;
 import com.zjf.finder.biz.home.presenter.CategoryDetailPresenter;
 import com.zjf.finder.constant.Constant;
 import com.zjf.finder.utils.CollectionUtils;
+import com.zjf.finder.utils.TypeUrlUtils;
 
 import java.util.List;
 
@@ -27,10 +30,11 @@ import java.util.List;
  * Created by zhengjunfei on 2018/1/6.
  */
 
-public class CategoryDetailFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, CategoryDetailContract.UI {
+public class CategoryDetailFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, CategoryDetailContract.UI, CategoryItem {
     private RecyclerView mRecyclerView;
     private CategoryDetailPresenter mPresenter;
     private CategoryDetailAdapter mAdapter;
+    private Category mExtraCategory;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -51,9 +55,14 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
 
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        getIntentData();
         initAdapter();
         initData();
         initListener();
+    }
+
+    private void getIntentData(){
+        mExtraCategory = (Category) getArguments().get(Constant.CategoryDetailFragment.EXTRA_CATEGORY);
     }
 
     private void initAdapter(){
@@ -64,7 +73,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     private void initData(){
-        mPresenter.getCategoryDetailList();
+        mPresenter.getCategoryDetailList(TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
     }
 
     private void initListener(){
@@ -109,6 +118,16 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.getCategoryDetailList();
+        mPresenter.getCategoryDetailList(TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+    }
+
+    @Override
+    public String getCategory() {
+        return mExtraCategory == null ? "" : mExtraCategory.getName();
+    }
+
+    @Override
+    public void setCategory(Category category) {
+        this.mExtraCategory = category;
     }
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class CategoryDetailModel implements CategoryDetailContract.Model {
 
     @Override
-    public void getCategoryDetailList(int page, final CategoryDetailContract.OnListener listener) {
+    public void getCategoryDetailList(String category, int page, final CategoryDetailContract.OnListener listener) {
 //        RetrofitHttpClient.getInstance().forRetrofit(Constant.BASE_URL, NewsService.class)
 //                .getCategoryDetailList("Article", "categoryDetail").enqueue(new HttpCallback<Result<List<CategoryDetail>>>() {
 //            @Override
@@ -37,7 +37,7 @@ public class CategoryDetailModel implements CategoryDetailContract.Model {
 //            }
 //        });
         RetrofitHttpClient.getInstance().forRetrofit(Constant.BASE_URL, NewsService.class)
-                .getNewsData("social", Constant.APIKEY, "10", page).enqueue(new HttpCallback2<Result2>() {
+                .getNewsData(category, Constant.APIKEY, "10", page).enqueue(new HttpCallback2<Result2>() {
             @Override
             public void onResponse(Result2 result2) {
                 if(result2 != null && result2.getNewslist() != null){

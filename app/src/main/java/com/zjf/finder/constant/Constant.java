@@ -20,4 +20,8 @@ public class Constant {
         public static final String Web_Title = "webTitle";
     }
 
+    public class CategoryDetailFragment{
+        public static final String EXTRA_CATEGORY = "extra_category";
+    }
+
 }
