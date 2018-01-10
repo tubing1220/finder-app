@@ -106,6 +106,8 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     @Override
     public void setCategoryDetailList(List<News> categoryDetailList, boolean isRefresh) {
         if(isRefresh){
+            finishRefresh();
+            contrastIsLastData(categoryDetailList);
             mAdapter.setNewData(categoryDetailList);
         } else{
             mAdapter.addData(categoryDetailList);
@@ -113,6 +115,18 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
         mAdapter.setEnableLoadMore(true);
         mAdapter.loadMoreComplete();
 //        Toast.makeText(getContext(), String.valueOf(categoryDetailList.size()), Toast.LENGTH_LONG).show();
+    }
+
+    private void contrastIsLastData(List<News> categoryDetailList){
+        if(mAdapter == null || !CollectionUtils.isValid(mAdapter.getData(), 0) || !CollectionUtils.isValid(categoryDetailList, 0)){
+           return;
+        }
+        News nowFirst = mAdapter.getData().get(0);
+        News newFirst = categoryDetailList.get(0);
+        if(nowFirst.getUrl().equals(newFirst.getUrl())){
+            Toast.makeText(getContext(), "已是最新内容", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void finishRefresh(){

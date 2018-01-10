@@ -36,7 +36,7 @@ public class CategoryDetailPresenter extends BasePresenter implements CategoryDe
     public void onCategoryDetailSuccessListener(List<News> categoryDetailList) {
         CategoryDetailContract.UI ui = getUI();
         if(ui != null){
-            ui.setCategoryDetailList(categoryDetailList, mPage == 2);
+            ui.setCategoryDetailList(categoryDetailList, mPage == 1);
         }
     }
 
