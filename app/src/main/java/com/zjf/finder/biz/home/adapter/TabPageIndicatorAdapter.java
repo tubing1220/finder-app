@@ -63,6 +63,10 @@ public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter {
         }
     }
 
+    public BaseFragment getCurrentFragment(){
+        return mCurrentFragment;
+    }
+
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         mCurrentFragment = (BaseFragment) object;

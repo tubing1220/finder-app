@@ -73,7 +73,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     private void initData(){
-        mPresenter.getCategoryDetailList(TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+        mPresenter.getCategoryDetailList(false, TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
     }
 
     private void initListener(){
@@ -99,6 +99,11 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     @Override
+    public void OnRefresh() {
+        mPresenter.getCategoryDetailList(true, TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+    }
+
+    @Override
     public void setCategoryDetailList(List<News> categoryDetailList, boolean isRefresh) {
         if(isRefresh){
             mAdapter.setNewData(categoryDetailList);
@@ -110,6 +115,14 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 //        Toast.makeText(getContext(), String.valueOf(categoryDetailList.size()), Toast.LENGTH_LONG).show();
     }
 
+    private void finishRefresh(){
+        if(!isAdded() || getActivity() == null){
+            return;
+        }
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.finishRefresh();
+    }
+
     @Override
     public void onCategoryDetailError(int code, String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
@@ -118,7 +131,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.getCategoryDetailList(TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+        mPresenter.getCategoryDetailList(false, TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
     }
 
     @Override
@@ -130,4 +143,5 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     public void setCategory(Category category) {
         this.mExtraCategory = category;
     }
+
 }

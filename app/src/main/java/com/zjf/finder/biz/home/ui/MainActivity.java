@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.zjf.finder.R;
 import com.zjf.finder.base.activity.BaseActivity;
+import com.zjf.finder.base.fragment.BaseFragment;
 import com.zjf.finder.biz.home.adapter.NavigatorAdapter;
 import com.zjf.finder.biz.home.adapter.TabPageIndicatorAdapter;
+import com.zjf.finder.biz.home.interfaces.CategoryItem;
 import com.zjf.finder.biz.home.model.Category;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -22,13 +25,15 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements NavigatorAdapter.TabListCLickListener {
+public class MainActivity extends BaseActivity implements NavigatorAdapter.TabListCLickListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.indicator)
     MagicIndicator mIndicator;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
+    @BindView(R.id.activity_swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private TabPageIndicatorAdapter fragmentPagerAdapter;
+    private TabPageIndicatorAdapter mFragmentPagerAdapter;
     private NavigatorAdapter mCommonNavigatorAdapter;
     private List<Category> mTabList = new ArrayList<>();
 
@@ -42,15 +47,16 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
 
         initView();
 
-
-
 //        showHomePageFragment();
 //        getData2();
     }
 
     private void initView(){
-        fragmentPagerAdapter = new TabPageIndicatorAdapter(mTabList, getSupportFragmentManager());
-        mViewPager.setAdapter(fragmentPagerAdapter);
+        mFragmentPagerAdapter = new TabPageIndicatorAdapter(mTabList, getSupportFragmentManager());
+        mViewPager.setAdapter(mFragmentPagerAdapter);
+
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_loadding_first_color, R.color.refresh_loadding_second_color);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         mViewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mIndicator = (MagicIndicator) findViewById(R.id.indicator);
@@ -68,13 +74,26 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
         initData();
     }
 
-
     private void initData(){
         List<Category> categoryList = getInitData();
-        fragmentPagerAdapter.setData(categoryList);
+        mFragmentPagerAdapter.setData(categoryList);
 
         mCommonNavigatorAdapter.setData(categoryList);
         mIndicator.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRefresh() {
+        BaseFragment currentFragment = mFragmentPagerAdapter.getCurrentFragment();
+        if(currentFragment != null){
+            ((CategoryItem)currentFragment).OnRefresh();
+        }
+    }
+
+    public void finishRefresh(){
+        if(mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()){
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     private List<Category> getInitData(){

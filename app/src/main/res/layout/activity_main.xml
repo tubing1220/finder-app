@@ -9,11 +9,18 @@
         android:layout_height="48dp"
         android:visibility="visible"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <com.zjf.finder.base.view.CustomSwipeRefreshLayout
+        android:id="@+id/activity_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/indicator"/>
+        android:layout_below="@+id/indicator">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.zjf.finder.base.view.CustomSwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/tab_change_layout"

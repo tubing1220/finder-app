@@ -17,7 +17,7 @@ public class CategoryDetailPresenter extends BasePresenter implements CategoryDe
 
     public CategoryDetailPresenter(CategoryDetailContract.UI ui){
         addWeakRefObj(ui);
-        mPage = 1;
+        mPage = 0;
         mModel = new CategoryDetailModel();
     }
 
@@ -25,8 +25,9 @@ public class CategoryDetailPresenter extends BasePresenter implements CategoryDe
         return getUI(CategoryDetailContract.UI.class);
     }
 
-    public void getCategoryDetailList(String category){
+    public void getCategoryDetailList(boolean isRefresh, String category){
         if(mModel != null){
+            mPage = isRefresh ? 0 : mPage;
             mModel.getCategoryDetailList(category, mPage++, this);
         }
     }

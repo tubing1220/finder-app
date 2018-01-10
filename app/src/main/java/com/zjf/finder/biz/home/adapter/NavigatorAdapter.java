@@ -62,18 +62,6 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
         return simplePagerTitleView;
     }
 
-//    private ColorFlipPagerTitleView.OnPageTitleListener pageTitleListener = new ColorFlipPagerTitleView.OnPageTitleListener() {
-//        @Override
-//        public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
-//            leaveCurrentPercent = leavePercent;
-//        }
-//
-//        @Override
-//        public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
-//            enterCurrentPercent = enterPercent;
-//        }
-//    };
-
     @Override
     public IPagerIndicator getIndicator(Context context) {
         LinePagerIndicator indicator = new LinePagerIndicator(context);
@@ -94,6 +82,4 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     public interface TabListCLickListener {
         void OnTabListCLickListener(int index);
     }
-
-
 }

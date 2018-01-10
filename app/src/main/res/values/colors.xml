@@ -14,4 +14,8 @@
     <color name="color_ff294d">#ff294d</color>
     <color name="color_d2d2d2">#d2d2d2</color>
 
+    <color name="color_ef4581">#ef4581</color>
+    <color name="refresh_loadding_first_color">@color/color_ef4581</color>
+    <color name="refresh_loadding_second_color">@color/colorPrimary</color>
+
 </resources>
