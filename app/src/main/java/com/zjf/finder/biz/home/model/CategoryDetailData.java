@@ -9,7 +9,25 @@ import java.util.List;
  */
 
 public class CategoryDetailData {
+    private String after;
+    private double rankIndex;
     private List<CategoryDetail> list;
+
+    public String getAfter() {
+        return after;
+    }
+
+    public void setAfter(String after) {
+        this.after = after;
+    }
+
+    public double getRankIndex() {
+        return rankIndex;
+    }
+
+    public void setRankIndex(double rankIndex) {
+        this.rankIndex = rankIndex;
+    }
 
     public List<CategoryDetail> getList() {
         return list;

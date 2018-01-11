@@ -51,7 +51,7 @@ public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter {
         BaseFragment itemFragment = (BaseFragment) object;
         int position = -1;
         if (itemFragment instanceof CategoryItem) {
-            position = getTabListPosition(((CategoryItem) itemFragment).getCategory());
+            position = getTabListPosition(((CategoryItem) itemFragment).getCategoryId());
         }
 
         Log.i("PagerAdapterPosition : ", String.valueOf(position));
@@ -76,7 +76,7 @@ public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter {
     private int getTabListPosition(String category) {
         int tabListSize = mTabList.size();
         for (int i = 0; i < tabListSize; i++) {
-            if (category.equals(mTabList.get(i).getName())) {
+            if (category.equals(mTabList.get(i).getId())) {
                 return i;
             }
         }

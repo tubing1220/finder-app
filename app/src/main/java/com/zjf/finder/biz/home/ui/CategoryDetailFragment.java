@@ -18,6 +18,7 @@ import com.zjf.finder.biz.home.adapter.CategoryDetailAdapter;
 import com.zjf.finder.biz.home.contract.CategoryDetailContract;
 import com.zjf.finder.biz.home.interfaces.CategoryItem;
 import com.zjf.finder.biz.home.model.Category;
+import com.zjf.finder.biz.home.model.CategoryDetail;
 import com.zjf.finder.biz.home.model.News;
 import com.zjf.finder.biz.home.presenter.CategoryDetailPresenter;
 import com.zjf.finder.constant.Constant;
@@ -73,7 +74,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     private void initData(){
-        mPresenter.getCategoryDetailList(false, TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+        mPresenter.getCategoryDetailList(false,  mExtraCategory.getId());
     }
 
     private void initListener(){
@@ -82,9 +83,9 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if(mAdapter != null && CollectionUtils.isValid(mAdapter.getData(), position)){
-                    News news = mAdapter.getData().get(position);
-                    String url = news.getUrl();
-                    String title = news.getTitle();
+                    CategoryDetail categoryDetailItem = mAdapter.getData().get(position);
+                    String url = categoryDetailItem.getOriginalUrl();
+                    String title = categoryDetailItem.getTitle();
                     startWebView(url, title);
                 }
             }
@@ -100,11 +101,11 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void OnRefresh() {
-        mPresenter.getCategoryDetailList(true, TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+        mPresenter.getCategoryDetailList(true, mExtraCategory.getId());
     }
 
     @Override
-    public void setCategoryDetailList(List<News> categoryDetailList, boolean isRefresh) {
+    public void setCategoryDetailList(List<CategoryDetail> categoryDetailList, boolean isRefresh) {
         if(isRefresh){
             finishRefresh();
             contrastIsLastData(categoryDetailList);
@@ -117,16 +118,15 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 //        Toast.makeText(getContext(), String.valueOf(categoryDetailList.size()), Toast.LENGTH_LONG).show();
     }
 
-    private void contrastIsLastData(List<News> categoryDetailList){
+    private void contrastIsLastData(List<CategoryDetail> categoryDetailList){
         if(mAdapter == null || !CollectionUtils.isValid(mAdapter.getData(), 0) || !CollectionUtils.isValid(categoryDetailList, 0)){
            return;
         }
-        News nowFirst = mAdapter.getData().get(0);
-        News newFirst = categoryDetailList.get(0);
-        if(nowFirst.getUrl().equals(newFirst.getUrl())){
+        CategoryDetail nowFirst = mAdapter.getData().get(0);
+        CategoryDetail newFirst = categoryDetailList.get(0);
+        if(nowFirst.getId().equals(newFirst.getId())){
             Toast.makeText(getContext(), "已是最新内容", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void finishRefresh(){
@@ -145,12 +145,12 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.getCategoryDetailList(false, TypeUrlUtils.getTypeUrl(Integer.parseInt(mExtraCategory.getId())));
+        mPresenter.getCategoryDetailList(false, mExtraCategory.getName());
     }
 
     @Override
-    public String getCategory() {
-        return mExtraCategory == null ? "" : mExtraCategory.getName();
+    public String getCategoryId() {
+        return mExtraCategory == null ? "" : mExtraCategory.getId();
     }
 
     @Override

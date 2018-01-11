@@ -7,14 +7,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.Toast;
 
 import com.zjf.finder.R;
 import com.zjf.finder.base.activity.BaseActivity;
 import com.zjf.finder.base.fragment.BaseFragment;
 import com.zjf.finder.biz.home.adapter.NavigatorAdapter;
 import com.zjf.finder.biz.home.adapter.TabPageIndicatorAdapter;
+import com.zjf.finder.biz.home.contract.HomeContract;
 import com.zjf.finder.biz.home.interfaces.CategoryItem;
 import com.zjf.finder.biz.home.model.Category;
+import com.zjf.finder.biz.home.presenter.HomePresenter;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -25,7 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements NavigatorAdapter.TabListCLickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity implements NavigatorAdapter.TabListCLickListener, SwipeRefreshLayout.OnRefreshListener, HomeContract.UI {
     @BindView(R.id.indicator)
     MagicIndicator mIndicator;
     @BindView(R.id.view_pager)
@@ -35,6 +38,7 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
 
     private TabPageIndicatorAdapter mFragmentPagerAdapter;
     private NavigatorAdapter mCommonNavigatorAdapter;
+    private HomePresenter mPresenter;
     private List<Category> mTabList = new ArrayList<>();
 
 
@@ -52,6 +56,7 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
     }
 
     private void initView(){
+        mPresenter = new HomePresenter(this);
         mFragmentPagerAdapter = new TabPageIndicatorAdapter(mTabList, getSupportFragmentManager());
         mViewPager.setAdapter(mFragmentPagerAdapter);
 
@@ -75,11 +80,21 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
     }
 
     private void initData(){
-        List<Category> categoryList = getInitData();
-        mFragmentPagerAdapter.setData(categoryList);
+        mPresenter.getCategoryList();
+    }
 
-        mCommonNavigatorAdapter.setData(categoryList);
+    @Override
+    public void setCategoryList(List<Category> categoryList) {
+        List<Category> categoryListTemp = new ArrayList<>();
+        categoryListTemp.addAll(categoryList);
+        mFragmentPagerAdapter.setData(categoryListTemp);
+        mCommonNavigatorAdapter.setData(categoryListTemp);
         mIndicator.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onCategoryListError(int code, String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -151,7 +166,7 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
 
 
 //    private void getData(){
-//        RetrofitHttpClient.getInstance().forRetrofit(Constant.BASE_URL, NewsService.class)
+//        RetrofitHttpClient.getInstance().forRetrofit(Constant.BASE_URL, CategoryDetailService.class)
 //                .getNewsData("social", Constant.APIKEY, "10", 1).enqueue(new HttpCallback2<Result2>() {
 //            @Override
 //            public void onResponse(Result2 result2) {
@@ -169,7 +184,7 @@ public class MainActivity extends BaseActivity implements NavigatorAdapter.TabLi
 //    }
 //
 //    private void getData2(){
-//        RetrofitHttpClient.getInstance().forRetrofit(Constant.FINDER_BASE_URL, NewsService.class)
+//        RetrofitHttpClient.getInstance().forRetrofit(Constant.FINDER_BASE_URL, CategoryDetailService.class)
 //                .getCategoryDetailList("Article", "categoryDetail").enqueue(new HttpCallback<Result<CategoryDetailData>>() {
 //
 //            @Override

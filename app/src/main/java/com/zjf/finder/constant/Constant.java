@@ -11,6 +11,13 @@ public class Constant {
 
     public static String FINDER_BASE_URL="http://finder123.applinzi.com/";
 
+    public static class Common{
+        public static final String ACCESS_ARTICLE = "Article";
+        public static final String SUBMIT_CATEGORYLIST = "categoryList";
+        public static final String SUBMIT_CATEGORYDETAIL = "categoryDetail";
+    }
+
+
     public static final int DEF_AUTO_LOAD_MORE_SIZE = 3;
 
     public static class CommonWebActivity {

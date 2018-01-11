@@ -19,26 +19,19 @@ import java.util.List;
  * Created by zhengjunfei on 2018/1/6.
  */
 
-public class CategoryDetailAdapter extends BaseQuickAdapter<News, BaseViewHolder> {
+public class CategoryDetailAdapter extends BaseQuickAdapter<CategoryDetail, BaseViewHolder> {
 
-    public CategoryDetailAdapter(List<News> data) {
+    public CategoryDetailAdapter(List<CategoryDetail> data) {
         super(R.layout.category_detail_item_layout, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder holder, News item) {
+    protected void convert(BaseViewHolder holder, CategoryDetail item) {
         CircleImageView photoImageView = holder.getView(R.id.photo);
-        ImageLoader.load(BaseApplication.getContext(), item.getPicUrl(), photoImageView, new ColorDrawable(Color.parseColor("#eeeff2")));
-        holder.setText(R.id.name, String.valueOf(item.getTitle()));
-        holder.setText(R.id.category_name, String.valueOf(item.getDescription()));
+        ImageLoader.load(BaseApplication.getContext(), item.getHeaderUrl(), photoImageView, new ColorDrawable(Color.parseColor("#eeeff2")));
+        holder.setText(R.id.name, String.valueOf(item.getName()));
+        holder.setText(R.id.category_name, item.getClassifyName());
         holder.setText(R.id.title, String.valueOf(item.getTitle()));
-
-//        ImageView photoImageView = holder.getView(R.id.photo);
-//        ImageLoader.load(BaseApplication.getContext(), item.getHeaderUrl(), photoImageView, new ColorDrawable(Color.parseColor("#eeeff2")));
-//        holder.setText(R.id.name, String.valueOf(item.getName()));
-//        holder.setText(R.id.category_name, String.valueOf(item.getClassifyName()));
-//        holder.setText(R.id.title, String.valueOf(item.getTitle()));
-//        holder.setText(R.id.desc, String.valueOf(item.getDesc()));
-
+        holder.setText(R.id.desc,String.valueOf(item.getDesc()));
     }
 }

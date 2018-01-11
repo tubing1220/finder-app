@@ -7,7 +7,7 @@ import com.zjf.finder.biz.home.model.Category;
  */
 
 public interface CategoryItem {
-    String getCategory();
+    String getCategoryId();
     void setCategory(Category category);
     void OnRefresh();
 }

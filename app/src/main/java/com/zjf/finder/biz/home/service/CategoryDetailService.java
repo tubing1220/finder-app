@@ -16,13 +16,13 @@ import retrofit2.http.Query;
  * Created by zhengjunfei on 2018/1/3.
  */
 
-public interface NewsService {
+public interface CategoryDetailService {
 
     @GET("{type}/")
     Call<Result2> getNewsData(@Path("type") String type, @Query("key") String key, @Query("num") String num, @Query("page") int page);
 
     @GET("index.php")
-    Call<Result<CategoryDetailData>> getCategoryDetailList(@Query("access") String access, @Query("submit") String submit);
+    Call<Result<CategoryDetailData>> getCategoryDetailList(@Query("access") String access, @Query("submit") String submit, @Query("id") String id, @Query("rankIndex") String rankIndex);
 
 
 //    @GET("")

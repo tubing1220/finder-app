@@ -10,8 +10,18 @@ import com.google.gson.Gson;
  */
 
 public class Category implements Parcelable {
+
+    /**
+     * id : 10000
+     * name : 前端
+     * link : /welcome/frontend
+     * true_category_id : 5562b415e4b00c57d9b94ac8
+     */
+
     private String id;
     private String name;
+    private String link;
+    private String true_category_id;
 
     public String getId() {
         return id;
@@ -29,6 +39,22 @@ public class Category implements Parcelable {
         this.name = name;
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTrue_category_id() {
+        return true_category_id;
+    }
+
+    public void setTrue_category_id(String true_category_id) {
+        this.true_category_id = true_category_id;
+    }
+
     public String toString(){
         return new Gson().toJson(this);
     }
@@ -42,6 +68,8 @@ public class Category implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.name);
+        dest.writeString(this.link);
+        dest.writeString(this.true_category_id);
     }
 
     public Category() {
@@ -50,6 +78,8 @@ public class Category implements Parcelable {
     protected Category(Parcel in) {
         this.id = in.readString();
         this.name = in.readString();
+        this.link = in.readString();
+        this.true_category_id = in.readString();
     }
 
     public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
