@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.zjf.finder.base.glide.CircleTransform;
 
 /**
  * Created by zhengjunfei on 2018/1/6.
@@ -40,6 +41,31 @@ public class ImageLoader {
                 .placeholder(placeholder)
                 .into(iv);
     }
+
+    public static void loadCircle(Context context, String url, ImageView imageView, int drawable) {
+        if (isDestroyed(context)) {
+            return;
+        }
+        Glide.with(context)
+                .load(url)
+                .transform(new CircleTransform(context))
+                .dontAnimate()
+                .placeholder(drawable)
+                .into(imageView);
+    }
+
+    public static void loadCircle(Context context, String url, ImageView imageView, ColorDrawable placeholder) {
+        if (isDestroyed(context)) {
+            return;
+        }
+        Glide.with(context)
+                .load(url)
+                .transform(new CircleTransform(context))
+                .dontAnimate()
+                .placeholder(placeholder)
+                .into(imageView);
+    }
+
 
     public static void clearImageMemoryCache(Context context) {
         try {

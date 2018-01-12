@@ -29,6 +29,7 @@ public class Constant {
 
     public class CategoryDetailFragment{
         public static final String EXTRA_CATEGORY = "extra_category";
+        public static final String DEF_RANKINDEX = "0";
     }
 
 }

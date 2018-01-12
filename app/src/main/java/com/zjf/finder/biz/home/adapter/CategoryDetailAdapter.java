@@ -8,9 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zjf.finder.R;
 import com.zjf.finder.base.BaseApplication;
-import com.zjf.finder.base.view.CircleImageView;
 import com.zjf.finder.biz.home.model.CategoryDetail;
-import com.zjf.finder.biz.home.model.News;
 import com.zjf.finder.utils.ImageLoader;
 
 import java.util.List;
@@ -27,8 +25,8 @@ public class CategoryDetailAdapter extends BaseQuickAdapter<CategoryDetail, Base
 
     @Override
     protected void convert(BaseViewHolder holder, CategoryDetail item) {
-        CircleImageView photoImageView = holder.getView(R.id.photo);
-        ImageLoader.load(BaseApplication.getContext(), item.getHeaderUrl(), photoImageView, new ColorDrawable(Color.parseColor("#eeeff2")));
+        ImageView photoImageView = holder.getView(R.id.photo);
+        ImageLoader.loadCircle(BaseApplication.getContext(), item.getHeaderUrl(), photoImageView, new ColorDrawable(Color.parseColor("#eeeff2")));
         holder.setText(R.id.name, String.valueOf(item.getName()));
         holder.setText(R.id.category_name, item.getClassifyName());
         holder.setText(R.id.title, String.valueOf(item.getTitle()));

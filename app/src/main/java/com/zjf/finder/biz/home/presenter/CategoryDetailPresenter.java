@@ -2,18 +2,11 @@ package com.zjf.finder.biz.home.presenter;
 
 import android.text.TextUtils;
 
-import com.zjf.finder.R;
-import com.zjf.finder.base.BaseApplication;
-import com.zjf.finder.base.http.HttpCallback;
 import com.zjf.finder.base.mvp.presenter.BasePresenter;
 import com.zjf.finder.biz.home.contract.CategoryDetailContract;
-import com.zjf.finder.biz.home.model.Category;
-import com.zjf.finder.biz.home.model.CategoryDetail;
 import com.zjf.finder.biz.home.model.CategoryDetailData;
 import com.zjf.finder.biz.home.model.CategoryDetailModel;
-import com.zjf.finder.biz.home.model.News;
-
-import java.util.List;
+import com.zjf.finder.constant.Constant;
 
 /**
  * Created by Administrator on 2018/1/6.
@@ -48,8 +41,8 @@ public class CategoryDetailPresenter extends BasePresenter implements CategoryDe
             return;
         }
         mAfter = categoryDetailData.getAfter();
+        ui.setCategoryDetailList(categoryDetailData.getList(), Constant.CategoryDetailFragment.DEF_RANKINDEX.equals(mRankIndex), TextUtils.isEmpty(mAfter));
         mRankIndex = String.valueOf(categoryDetailData.getRankIndex());
-        ui.setCategoryDetailList(categoryDetailData.getList(), TextUtils.isEmpty(mAfter));
     }
 
     @Override

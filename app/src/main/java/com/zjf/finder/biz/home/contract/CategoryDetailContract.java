@@ -13,7 +13,7 @@ import java.util.List;
 public class CategoryDetailContract {
 
     public interface UI extends BaseUI{
-        void setCategoryDetailList(List<CategoryDetail> categoryDetailList, boolean isRefresh);
+        void setCategoryDetailList(List<CategoryDetail> categoryDetailList, boolean isRefresh, boolean isEnd);
         void onCategoryDetailError(int code, String msg);
     }
 

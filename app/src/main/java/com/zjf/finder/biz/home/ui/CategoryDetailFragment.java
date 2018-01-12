@@ -19,11 +19,9 @@ import com.zjf.finder.biz.home.contract.CategoryDetailContract;
 import com.zjf.finder.biz.home.interfaces.CategoryItem;
 import com.zjf.finder.biz.home.model.Category;
 import com.zjf.finder.biz.home.model.CategoryDetail;
-import com.zjf.finder.biz.home.model.News;
 import com.zjf.finder.biz.home.presenter.CategoryDetailPresenter;
 import com.zjf.finder.constant.Constant;
 import com.zjf.finder.utils.CollectionUtils;
-import com.zjf.finder.utils.TypeUrlUtils;
 
 import java.util.List;
 
@@ -105,7 +103,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     @Override
-    public void setCategoryDetailList(List<CategoryDetail> categoryDetailList, boolean isRefresh) {
+    public void setCategoryDetailList(List<CategoryDetail> categoryDetailList, boolean isRefresh, boolean isEnd) {
         if(isRefresh){
             finishRefresh();
             contrastIsLastData(categoryDetailList);
@@ -114,7 +112,11 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
             mAdapter.addData(categoryDetailList);
         }
         mAdapter.setEnableLoadMore(true);
-        mAdapter.loadMoreComplete();
+        if(isEnd){
+            mAdapter.loadMoreEnd();
+        }else{
+            mAdapter.loadMoreComplete();
+        }
 //        Toast.makeText(getContext(), String.valueOf(categoryDetailList.size()), Toast.LENGTH_LONG).show();
     }
 
@@ -145,7 +147,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.getCategoryDetailList(false, mExtraCategory.getName());
+        mPresenter.getCategoryDetailList(false, mExtraCategory.getId());
     }
 
     @Override
