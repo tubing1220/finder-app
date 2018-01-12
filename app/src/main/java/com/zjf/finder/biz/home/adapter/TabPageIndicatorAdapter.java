@@ -21,9 +21,13 @@ import java.util.List;
  * Created by zhengjunfei on 2018/1/8.
  */
 
-public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter {
+public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter implements CategoryDetailFragment.Callback {
+    public interface Callback{
+        void finishRefresh();
+    }
     private List<Category> mTabList = new ArrayList<>();
     private BaseFragment mCurrentFragment;
+    private Callback mCallback;
 
     public TabPageIndicatorAdapter(List<Category> categoryList, FragmentManager fm) {
         super(fm);
@@ -36,9 +40,14 @@ public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter {
         notifyDataSetChanged();
     }
 
+    public void setCallback(Callback callback){
+        this.mCallback = callback;
+    }
+
     @Override
     public Fragment getItem(int position) {
         CategoryDetailFragment categoryDetailFragment = new CategoryDetailFragment();
+        categoryDetailFragment.setCallback(this);
         Bundle args = new Bundle();
         Category category = mTabList.get(position);
         args.putParcelable(Constant.CategoryDetailFragment.EXTRA_CATEGORY, category);
@@ -86,5 +95,12 @@ public class TabPageIndicatorAdapter extends FragmentItemIdStatePagerAdapter {
     @Override
     public int getCount() {
         return mTabList == null ? 0 : mTabList.size();
+    }
+
+    @Override
+    public void finishRefresh() {
+        if(mCallback != null){
+            mCallback.finishRefresh();
+        }
     }
 }

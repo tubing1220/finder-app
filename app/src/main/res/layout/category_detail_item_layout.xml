@@ -4,19 +4,25 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/color_white"
-    android:orientation="vertical"
-    android:paddingTop="10dp">
+    android:paddingBottom="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/color_f2f2f2"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <com.zjf.finder.base.view.CircleImageView
             android:id="@+id/photo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/color_white"
             android:layout_alignParentLeft="true"
@@ -54,7 +60,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textStyle="bold"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:text="这里是标题"
         android:textColor="@color/color_black"
@@ -64,16 +69,12 @@
         android:id="@+id/desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:minHeight="@dimen/dp_0"
         android:maxLines="4"
         android:textColor="@color/color_666666"
         android:textSize="12sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/color_f2f2f2"/>
 
 </LinearLayout>

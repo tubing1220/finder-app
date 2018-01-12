@@ -14,6 +14,8 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.zjf.finder.R;
 import com.zjf.finder.base.fragment.BaseFragment;
 import com.zjf.finder.base.view.CommonWebViewActivity;
+import com.zjf.finder.base.view.CustomizeLoadMoreView;
+import com.zjf.finder.base.view.StateView;
 import com.zjf.finder.biz.home.adapter.CategoryDetailAdapter;
 import com.zjf.finder.biz.home.contract.CategoryDetailContract;
 import com.zjf.finder.biz.home.interfaces.CategoryItem;
@@ -22,6 +24,7 @@ import com.zjf.finder.biz.home.model.CategoryDetail;
 import com.zjf.finder.biz.home.presenter.CategoryDetailPresenter;
 import com.zjf.finder.constant.Constant;
 import com.zjf.finder.utils.CollectionUtils;
+import com.zjf.finder.utils.NetworkUtils;
 
 import java.util.List;
 
@@ -30,10 +33,15 @@ import java.util.List;
  */
 
 public class CategoryDetailFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, CategoryDetailContract.UI, CategoryItem {
+    public interface Callback{
+        void finishRefresh();
+    }
+
     private RecyclerView mRecyclerView;
     private CategoryDetailPresenter mPresenter;
     private CategoryDetailAdapter mAdapter;
     private Category mExtraCategory;
+    private Callback mCallback;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -47,6 +55,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     private void initView(View rootView){
+        setState(StateView.STATE_LOADDING);
         mPresenter = new CategoryDetailPresenter(this);
         mRecyclerView = rootView.findViewById(R.id.recyclerview);
 
@@ -67,6 +76,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     private void initAdapter(){
         mAdapter = new CategoryDetailAdapter(null);
         mAdapter.setOnLoadMoreListener(this);
+        mAdapter.setLoadMoreView(new CustomizeLoadMoreView());
         mAdapter.setAutoLoadMoreSize(Constant.DEF_AUTO_LOAD_MORE_SIZE);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -90,6 +100,10 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
         });
     }
 
+    public void setCallback(Callback callback){
+        this.mCallback = callback;
+    }
+
     private void startWebView(String url, String title){
         Intent intent  = new Intent(getActivity(), CommonWebViewActivity.class);
         intent.putExtra(Constant.CommonWebActivity.EXTRA_URL, url);
@@ -104,6 +118,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void setCategoryDetailList(List<CategoryDetail> categoryDetailList, boolean isRefresh, boolean isEnd) {
+        setState(StateView.STATE_OK);
         if(isRefresh){
             finishRefresh();
             contrastIsLastData(categoryDetailList);
@@ -117,7 +132,6 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
         }else{
             mAdapter.loadMoreComplete();
         }
-//        Toast.makeText(getContext(), String.valueOf(categoryDetailList.size()), Toast.LENGTH_LONG).show();
     }
 
     private void contrastIsLastData(List<CategoryDetail> categoryDetailList){
@@ -132,16 +146,22 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     private void finishRefresh(){
-        if(!isAdded() || getActivity() == null){
-            return;
+        if(mCallback != null){
+            mCallback.finishRefresh();
         }
-        MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.finishRefresh();
     }
 
     @Override
     public void onCategoryDetailError(int code, String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+        if(CollectionUtils.isEmpty(mAdapter.getData())){
+            if(NetworkUtils.isConnected(getContext())){
+                setState(StateView.STATE_EMPTY);
+            } else{
+                setState(StateView.STATE_ERROR);
+            }
+        } else{
+            Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+        }
         mAdapter.loadMoreEnd();
     }
 
