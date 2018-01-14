@@ -1,7 +1,10 @@
 package com.zjf.finder.base.view;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
@@ -41,17 +44,19 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
     @BindView(R.id.toolbar_divider)
     View divider;
 
-
     public CustomToolBar(Context context) {
         super(context);
+        initView();
     }
 
     public CustomToolBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        initView();
     }
 
     public CustomToolBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initView();
     }
 
     private void initView(){
@@ -60,9 +65,7 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
         mTitleLeftLayout.setOnClickListener(this);
         mTitleRightButton.setOnClickListener(this);
         mTitleRightLeftButton.setOnClickListener(this);
-
     }
-
 
     @Override
     public void onClick(View view) {
@@ -78,6 +81,49 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
         }
     }
 
+    public void setTitleBackgroundColor(int color){
+        container.setBackground(new ColorDrawable(color));
+    }
+
+    public void setTitleLeftText(int resId) {
+        mTitleLeftLayout.setVisibility(VISIBLE);
+        mTitleLeftText.setVisibility(VISIBLE);
+        mTitleLeftText.setText(resId);
+    }
+
+    public void setTitleLeftText(String text) {
+        mTitleLeftLayout.setVisibility(VISIBLE);
+        mTitleLeftText.setVisibility(VISIBLE);
+        mTitleLeftText.setText(text);
+    }
+
+    public void setTitleRightLeftText(String text) {
+        mTitleLeftLayout.setVisibility(VISIBLE);
+        mTitleRightLeftButton.setVisibility(View.VISIBLE);
+        mTitleRightLeftButton.setText(text);
+    }
+
+    public void setTitleRightLeftDrawable(int res) {
+        mTitleLeftLayout.setVisibility(VISIBLE);
+        mTitleRightLeftButton.setVisibility(View.VISIBLE);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), res);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        mTitleRightLeftButton.setCompoundDrawables(drawable, null, null, null);
+    }
+
+    public void setTitleRightLeftText(int resId) {
+        mTitleLeftLayout.setVisibility(VISIBLE);
+        mTitleRightLeftButton.setVisibility(View.VISIBLE);
+        mTitleRightLeftButton.setText(resId);
+    }
+
+    public void setTitleContentText(int textId, int color){
+        mTitleContent.setVisibility(VISIBLE);
+        mTitleContent.setText(textId);
+        if (color != 0){
+            mTitleContent.setTextColor(color);
+        }
+    }
 
     public OnToolBarClickListener mOnToolBarClickListener;
 

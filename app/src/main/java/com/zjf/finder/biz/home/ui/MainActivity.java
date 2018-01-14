@@ -14,8 +14,13 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initTitle();
         showHomePageFragment();
+    }
+
+    private void initTitle(){
+//        setTitleBackgroundColor(R.color.colorPrimary);
+        setTitleContentText(R.string.app_name_text, 0);
     }
 
     //显示首页Fragment

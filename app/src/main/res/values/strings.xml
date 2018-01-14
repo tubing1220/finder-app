@@ -7,4 +7,6 @@
     <string name="load_more_load_failed">加载失败，请点击重试</string>
     <string name="load_more_load_end">没有更多内容</string>
 
+    <string name="app_name_text">程序羊</string>
+
 </resources>
