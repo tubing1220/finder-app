@@ -4,18 +4,21 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-
     <color name="color_black">#000000</color>
     <color name="color_white">#ffffff</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_status_bar">@color/color_white</color>
+    <color name="silver">#bcbdc2</color>
 
     <color name="color_494b58">#494b58</color>
     <color name="color_666666">#666666</color>
     <color name="color_f2f2f2">#f2f2f2</color>
+    <color name="color_383838">#383838</color>
     <color name="color_ff294d">#ff294d</color>
     <color name="color_d2d2d2">#d2d2d2</color>
-    <color name="silver">#bcbdc2</color>
-
+    <color name="color_e5e5e5">#e5e5e5</color>
     <color name="color_ef4581">#ef4581</color>
+
     <color name="refresh_loadding_first_color">@color/colorPrimary</color>
     <color name="refresh_loadding_second_color">@color/color_ef4581</color>
 
