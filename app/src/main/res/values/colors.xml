@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">@color/color_017fff</color>
+    <color name="colorPrimaryDark">#0172E5</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="color_black">#000000</color>
@@ -9,6 +9,7 @@
     <color name="color_transparent">#00000000</color>
     <color name="color_status_bar">@color/color_white</color>
     <color name="silver">#bcbdc2</color>
+    <color name="color_default_title_bg">@color/color_017fff</color>
 
     <color name="color_494b58">#494b58</color>
     <color name="color_666666">#666666</color>
@@ -18,6 +19,7 @@
     <color name="color_d2d2d2">#d2d2d2</color>
     <color name="color_e5e5e5">#e5e5e5</color>
     <color name="color_ef4581">#ef4581</color>
+    <color name="color_017fff">#017fff</color>
 
     <color name="refresh_loadding_first_color">@color/colorPrimary</color>
     <color name="refresh_loadding_second_color">@color/color_ef4581</color>

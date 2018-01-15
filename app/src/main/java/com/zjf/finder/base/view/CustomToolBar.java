@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zjf.finder.R;
+import com.zjf.finder.base.BaseApplication;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,7 +83,7 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
     }
 
     public void setTitleBackgroundColor(int color){
-        container.setBackground(new ColorDrawable(color));
+        container.setBackgroundColor(ContextCompat.getColor(BaseApplication.getContext(), color));
     }
 
     public void setTitleLeftText(int resId) {
