@@ -8,5 +8,7 @@
     <string name="load_more_load_end">没有更多内容</string>
 
     <string name="app_name_text">程序羊</string>
+    <string name="load_error_text">加载出错</string>
+    <string name="try_again_text">点击重试</string>
 
 </resources>

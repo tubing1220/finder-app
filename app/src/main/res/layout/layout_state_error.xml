@@ -5,11 +5,28 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="@dimen/dp_135"
+        android:layout_height="@dimen/dp_80"
+        android:scaleType="centerCrop"
+        android:src="@drawable/net_error_img"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
         android:textColor="@color/color_494b58"
         android:textSize="@dimen/sp_15"
-        android:text="加载出错"/>
+        android:text="@string/load_error_text"/>
+
+    <TextView
+        android:id="@+id/try_again_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_try_again_btn"
+        android:layout_marginTop="@dimen/dp_30"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_017fff"
+        android:text="@string/try_again_text"/>
 
 </LinearLayout>

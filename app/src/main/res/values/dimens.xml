@@ -4,12 +4,21 @@
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_0_3">0.3dp</dimen>
     <dimen name="dp_0_5">0.5dp</dimen>
+    <dimen name="dp_0_8">0.8dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_1_5">1.5dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
     <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_11">11dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_21">21dp</dimen>
     <dimen name="dp_30">30dp</dimen>
     <dimen name="dp_40">40dp</dimen>
@@ -17,6 +26,9 @@
     <dimen name="dp_45">45dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_72">72dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_84_5">84.5dp</dimen>
+    <dimen name="dp_135">135dp</dimen>
 
     <dimen name="sp_8">8sp</dimen>
     <dimen name="sp_9">9sp</dimen>
