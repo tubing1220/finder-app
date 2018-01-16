@@ -10,6 +10,7 @@
     <color name="color_status_bar">@color/color_white</color>
     <color name="silver">#bcbdc2</color>
     <color name="color_default_title_bg">@color/color_017fff</color>
+    <color name="color_tip_bg">@color/color_017fff</color>
 
     <color name="color_494b58">#494b58</color>
     <color name="color_666666">#666666</color>

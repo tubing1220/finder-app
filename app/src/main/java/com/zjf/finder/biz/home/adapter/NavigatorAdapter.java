@@ -2,10 +2,13 @@ package com.zjf.finder.biz.home.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
+import com.zjf.finder.R;
+import com.zjf.finder.base.BaseApplication;
 import com.zjf.finder.base.view.ColorFlipPagerTitleView;
 import com.zjf.finder.biz.home.model.Category;
 
@@ -49,7 +52,7 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     public IPagerTitleView getTitleView(Context context, final int index) {
         SimplePagerTitleView simplePagerTitleView = new ColorFlipPagerTitleView(context);
         simplePagerTitleView.setNormalColor(Color.parseColor("#383838"));
-        simplePagerTitleView.setSelectedColor(Color.parseColor("#3F51B5"));
+        simplePagerTitleView.setSelectedColor(ContextCompat.getColor(BaseApplication.getContext(), R.color.color_tip_bg));
         simplePagerTitleView.setText(mCategoryList.get(index).getName());
         simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +74,7 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
         indicator.setRoundRadius(UIUtil.dip2px(context, 3));
         indicator.setStartInterpolator(new AccelerateInterpolator());
         indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
-        indicator.setColors(Color.parseColor("#3F51B5"));
+        indicator.setColors(ContextCompat.getColor(BaseApplication.getContext(), R.color.color_tip_bg));
         return indicator;
     }
 
