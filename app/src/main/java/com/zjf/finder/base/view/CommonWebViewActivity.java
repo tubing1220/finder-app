@@ -1,5 +1,7 @@
 package com.zjf.finder.base.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -29,19 +31,45 @@ public class CommonWebViewActivity extends BaseActivity {
     WebView mWebview;
 
     private String mUrl;
+    private String mHeaderUrl;
     private String mTitle;
 
+    public static void start(Context context, String url, String headerUrl, String title){
+        Intent intent  = new Intent(context, CommonWebViewActivity.class);
+        intent.putExtra(Constant.CommonWebActivity.EXTRA_URL, url);
+        intent.putExtra(Constant.CommonWebActivity.EXTRA_HEADER_URL, headerUrl);
+        intent.putExtra(Constant.CommonWebActivity.EXTRA_TITLE, title);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_common_webview);
+        getIntentData();
+        initTitle();
         initView();
+    }
+
+    private void getIntentData() {
+        mUrl = getIntent().getStringExtra(Constant.CommonWebActivity.EXTRA_URL);
+        mHeaderUrl = getIntent().getStringExtra(Constant.CommonWebActivity.EXTRA_HEADER_URL);
+        mTitle = getIntent().getStringExtra(Constant.CommonWebActivity.EXTRA_TITLE);
+        Uri uri = getIntent().getData();
+        if (TextUtils.isEmpty(mUrl) && uri != null) {
+            mUrl = UriParamQueryUtils.getStringQueryParameter(uri, Constant.CommonWebActivity.Web_Url);
+        }
+        if (TextUtils.isEmpty(mTitle) && uri != null) {
+            mTitle = UriParamQueryUtils.getStringQueryParameter(uri, Constant.CommonWebActivity.Web_Title);
+        }
+    }
+
+    private void initTitle(){
+        getCustomToolBar().setTitleLeftPhoto(mHeaderUrl, mTitle);
     }
 
     private void initView() {
         initSetting();
-        getIntentData();
         mWebview.loadUrl(mUrl);
     }
 
@@ -53,18 +81,6 @@ public class CommonWebViewActivity extends BaseActivity {
         mWebview.getSettings().setDatabaseEnabled(true);
         mWebview.getSettings().setDomStorageEnabled(true);
         mWebview.getSettings().setGeolocationEnabled(true);
-    }
-
-    private void getIntentData() {
-        mUrl = getIntent().getStringExtra(Constant.CommonWebActivity.EXTRA_URL);
-        mTitle = getIntent().getStringExtra(Constant.CommonWebActivity.EXTRA_TITLE);
-        Uri uri = getIntent().getData();
-        if (TextUtils.isEmpty(mUrl) && uri != null) {
-            mUrl = UriParamQueryUtils.getStringQueryParameter(uri, Constant.CommonWebActivity.Web_Url);
-        }
-        if (TextUtils.isEmpty(mTitle) && uri != null) {
-            mTitle = UriParamQueryUtils.getStringQueryParameter(uri, Constant.CommonWebActivity.Web_Title);
-        }
     }
 
     private WebViewClient OnWebViewClient = new WebViewClient() {

@@ -22,6 +22,7 @@ public class Constant {
 
     public static class CommonWebActivity {
         public static final String EXTRA_URL = "url";
+        public static final String EXTRA_HEADER_URL = "headerUrl";
         public static final String EXTRA_TITLE = "title";
         public static final String Web_Url = "webUrl";
         public static final String Web_Title = "webTitle";

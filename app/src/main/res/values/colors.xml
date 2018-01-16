@@ -22,7 +22,7 @@
     <color name="color_ef4581">#ef4581</color>
     <color name="color_017fff">#017fff</color>
 
-    <color name="refresh_loadding_first_color">@color/colorPrimary</color>
+    <color name="refresh_loadding_first_color">@color/color_017fff</color>
     <color name="refresh_loadding_second_color">@color/color_ef4581</color>
 
 </resources>

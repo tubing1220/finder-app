@@ -1,7 +1,6 @@
 package com.zjf.finder.base.view;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 
 import com.zjf.finder.R;
 import com.zjf.finder.base.BaseApplication;
+import com.zjf.finder.utils.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +26,12 @@ import butterknife.ButterKnife;
 public class CustomToolBar extends Toolbar implements View.OnClickListener {
     @BindView(R.id.title_left_layout)
     RelativeLayout mTitleLeftLayout;
+    @BindView(R.id.layout_photo)
+    RelativeLayout mLayoutPhoto;
+    @BindView(R.id.title_left_photo_img)
+    ImageView mTitleLeftPhoto;
+    @BindView(R.id.title_left_text)
+    TextView mTitleLeftText;
     @BindView(R.id.title_right_layout)
     RelativeLayout mTitleRightLayout;
     @BindView(R.id.toolbar_container)
@@ -38,8 +44,6 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
     TextView mTitleRightLeftButton;
     @BindView(R.id.title_content)
     TextView mTitleContent;
-    @BindView(R.id.title_left_text)
-    TextView mTitleLeftText;
     @BindView(R.id.toolbar)
     ViewGroup container;
     @BindView(R.id.toolbar_divider)
@@ -82,6 +86,30 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
         }
     }
 
+    public void setTitleLeftVisiable(boolean visiable){
+        mTitleLeftLayout.setVisibility(visiable ? View.VISIBLE : View.GONE);
+    }
+
+    public void setTitleLeftImage(int resId){
+        setTitleLeftVisiable(true);
+        mTitleLeftButton.setImageResource(resId);
+    }
+
+    public void setTitleLeftContent(String text){
+        setTitleLeftVisiable(true);
+        mTitleLeftButton.setImageResource(R.drawable.base_back_gray);
+        mTitleLeftText.setText(text);
+    }
+
+    public void setTitleLeftPhoto(String headUrl, String text){
+        setTitleLeftVisiable(true);
+        mTitleLeftText.setVisibility(View.VISIBLE);
+        mTitleLeftText.setText(text);
+        mTitleContent.setVisibility(View.GONE);
+        mTitleLeftButton.setImageResource(R.drawable.base_back_gray);
+        ImageLoader.loadCircle(getContext(), headUrl, mTitleLeftPhoto, R.drawable.default_no_sex_circle);
+    }
+
     public void setTitleBackgroundColor(int color){
         container.setBackgroundColor(ContextCompat.getColor(BaseApplication.getContext(), color));
     }
@@ -116,6 +144,19 @@ public class CustomToolBar extends Toolbar implements View.OnClickListener {
         mTitleLeftLayout.setVisibility(VISIBLE);
         mTitleRightLeftButton.setVisibility(View.VISIBLE);
         mTitleRightLeftButton.setText(resId);
+    }
+
+    public void setTitleContentText(String text){
+        mTitleContent.setVisibility(VISIBLE);
+        mTitleContent.setText(text);
+    }
+
+    public void setTitleContentText(String text, int color){
+        mTitleContent.setVisibility(VISIBLE);
+        mTitleContent.setText(text);
+        if (color != 0){
+            mTitleContent.setTextColor(color);
+        }
     }
 
     public void setTitleContentText(int textId, int color){

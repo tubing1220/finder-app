@@ -1,6 +1,5 @@
 package com.zjf.finder.biz.home.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -93,8 +92,9 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
                 if(mAdapter != null && CollectionUtils.isValid(mAdapter.getData(), position)){
                     CategoryDetail categoryDetailItem = mAdapter.getData().get(position);
                     String url = categoryDetailItem.getOriginalUrl();
+                    String headerUrl = categoryDetailItem.getHeaderUrl();
                     String title = categoryDetailItem.getTitle();
-                    startWebView(url, title);
+                    CommonWebViewActivity.start(getActivity(), url, headerUrl, title);
                 }
             }
         });
@@ -102,13 +102,6 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     public void setCallback(Callback callback){
         this.mCallback = callback;
-    }
-
-    private void startWebView(String url, String title){
-        Intent intent  = new Intent(getActivity(), CommonWebViewActivity.class);
-        intent.putExtra(Constant.CommonWebActivity.EXTRA_URL, url);
-        intent.putExtra(Constant.CommonWebActivity.EXTRA_TITLE, title);
-        startActivity(intent);
     }
 
     @Override

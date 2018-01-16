@@ -19,8 +19,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initTitle(){
-        setTitleBackgroundColor(R.color.color_default_title_bg);
-        setTitleContentText(R.string.app_name_text, 0);
+        getCustomToolBar().setTitleBackgroundColor(R.color.color_default_title_bg);
+        getCustomToolBar().setTitleContentText(R.string.app_name_text, 0);
     }
 
     //显示首页Fragment

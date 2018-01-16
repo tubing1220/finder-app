@@ -34,13 +34,9 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomTo
         ((LinearLayout) findViewById(R.id.activity_root_layout)).addView(contentView, 0, layoutParams);
         ButterKnife.bind(this);
     }
-    protected void setTitleContentText(int textId, int color){
-        mCustomToolBar.setVisibility(View.VISIBLE);
-        mCustomToolBar.setTitleContentText(textId, color);
-    }
 
-    protected void setTitleBackgroundColor(int color){
-        mCustomToolBar.setTitleBackgroundColor(color);
+    public CustomToolBar getCustomToolBar(){
+        return mCustomToolBar;
     }
 
     @Override
