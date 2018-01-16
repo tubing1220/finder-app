@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_try_again_btn"
         android:layout_marginTop="@dimen/dp_30"
-        android:textSize="@dimen/sp_12"
+        android:textSize="@dimen/sp_13"
         android:textColor="@color/color_017fff"
         android:text="@string/try_again_text"/>
 
