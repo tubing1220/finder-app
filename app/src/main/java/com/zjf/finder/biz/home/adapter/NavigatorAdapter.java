@@ -51,8 +51,9 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     @Override
     public IPagerTitleView getTitleView(Context context, final int index) {
         SimplePagerTitleView simplePagerTitleView = new ColorFlipPagerTitleView(context);
-        simplePagerTitleView.setNormalColor(Color.parseColor("#383838"));
+        simplePagerTitleView.setNormalColor(ContextCompat.getColor(BaseApplication.getContext(), R.color.color_383838));
         simplePagerTitleView.setSelectedColor(ContextCompat.getColor(BaseApplication.getContext(), R.color.color_tip_bg));
+        simplePagerTitleView.setBackgroundColor(ContextCompat.getColor(BaseApplication.getContext(), R.color.color_white));
         simplePagerTitleView.setText(mCategoryList.get(index).getName());
         simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
             @Override
