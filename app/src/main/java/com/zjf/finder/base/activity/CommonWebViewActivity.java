@@ -1,4 +1,4 @@
-package com.zjf.finder.base.view;
+package com.zjf.finder.base.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.zjf.finder.R;
-import com.zjf.finder.base.activity.BaseActivity;
 import com.zjf.finder.constant.Constant;
 import com.zjf.finder.utils.UriParamQueryUtils;
 

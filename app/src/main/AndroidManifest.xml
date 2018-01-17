@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".base.view.CommonWebViewActivity"
+            android:name=".base.activity.CommonWebViewActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

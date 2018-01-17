@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.zjf.finder.R;
 import com.zjf.finder.base.fragment.BaseFragment;
-import com.zjf.finder.base.view.CommonWebViewActivity;
+import com.zjf.finder.base.activity.CommonWebViewActivity;
 import com.zjf.finder.base.view.CustomizeLoadMoreView;
 import com.zjf.finder.base.view.StateView;
 import com.zjf.finder.biz.home.adapter.CategoryDetailAdapter;
@@ -93,8 +93,8 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
                     CategoryDetail categoryDetailItem = mAdapter.getData().get(position);
                     String url = categoryDetailItem.getOriginalUrl();
                     String headerUrl = categoryDetailItem.getHeaderUrl();
-                    String title = categoryDetailItem.getTitle();
-                    CommonWebViewActivity.start(getActivity(), url, headerUrl, title);
+                    String username = categoryDetailItem.getName();
+                    CommonWebViewActivity.start(getActivity(), url, headerUrl, username);
                 }
             }
         });
