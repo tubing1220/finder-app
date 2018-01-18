@@ -15,12 +15,23 @@ import com.zjf.finder.R;
  * Created by zhengjunfei on 2018/1/8.
  */
 
-public class StateView extends LinearLayout {
+public class StateView extends LinearLayout implements View.OnClickListener {
+
+    public interface Callback{
+        void onRetryListener();
+    }
+
     public static final int STATE_DEFAULT = 0;
     public static final int STATE_EMPTY = 1;
     public static final int STATE_LOADDING = 2;
     public static final int STATE_ERROR = 3;
     public static final int STATE_OK = 4;
+
+    private Callback mCallback;
+
+    public void setCallback(Callback callback){
+        this.mCallback = callback;
+    }
 
     public StateView(Context context) {
         super(context);
@@ -55,7 +66,8 @@ public class StateView extends LinearLayout {
             case STATE_ERROR:
                 setVisibility(View.VISIBLE);
                 continerView.setVisibility(View.GONE);
-                LayoutInflater.from(getContext()).inflate(R.layout.layout_state_error, this, true);
+                View errorView = LayoutInflater.from(getContext()).inflate(R.layout.layout_state_error, this, true);
+                errorView.findViewById(R.id.try_again_btn).setOnClickListener(this);
                 break;
             case STATE_OK:
                 setVisibility(View.GONE);
@@ -63,4 +75,16 @@ public class StateView extends LinearLayout {
                 break;
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.try_again_btn:
+                if(mCallback != null){
+                    mCallback.onRetryListener();
+                }
+                break;
+        }
+    }
+
 }

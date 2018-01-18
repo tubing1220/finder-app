@@ -116,6 +116,13 @@ public class HomePageFragment extends BaseFragment implements NavigatorAdapter.T
     }
 
     @Override
+    public void onRetry() {
+        if(mFragmentPagerAdapter != null){
+            initData();
+        }
+    }
+
+    @Override
     protected int getContentView() {
         return R.layout.fragment_home_page;
     }

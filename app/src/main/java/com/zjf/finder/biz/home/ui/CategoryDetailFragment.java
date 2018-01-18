@@ -164,6 +164,11 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
     }
 
     @Override
+    public void onRetry() {
+        initData();
+    }
+
+    @Override
     public String getCategoryId() {
         return mExtraCategory == null ? "" : mExtraCategory.getId();
     }

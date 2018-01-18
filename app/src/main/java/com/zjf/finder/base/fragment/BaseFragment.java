@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by zhengjunfei on 2018/1/8.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements StateView.Callback {
     private View mRootView;
     private LinearLayout mRootContinerView;
     private StateView mStateView;
@@ -29,6 +29,7 @@ public abstract class BaseFragment extends Fragment {
         View contentView = View.inflate(container.getContext(), getContentView(), null);
         mRootContinerView = mRootView.findViewById(R.id.fragment_root_layout);
         mStateView = mRootView.findViewById(R.id.state_view);
+        mStateView.setCallback(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         mRootContinerView.addView(contentView, 0, layoutParams);
         ButterKnife.bind(this, mRootView);
@@ -49,6 +50,13 @@ public abstract class BaseFragment extends Fragment {
     public void setState(int state){
         mStateView.setState(state, mRootContinerView);
     }
+
+    @Override
+    public void onRetryListener() {
+        onRetry();
+    }
+
+    public abstract void onRetry();
 
     /***
      * 获取Fragment中设置layout的id
