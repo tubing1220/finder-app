@@ -40,6 +40,13 @@ public abstract class BaseFragment extends Fragment implements StateView.Callbac
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+    public int getState(){
+        if(mStateView != null){
+            return mStateView.getState();
+        }
+        return StateView.STATE_DEFAULT;
+    }
     
     /**
      * 包含三种状态,loadding, error, ok

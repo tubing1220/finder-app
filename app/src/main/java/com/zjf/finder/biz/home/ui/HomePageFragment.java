@@ -99,7 +99,10 @@ public class HomePageFragment extends BaseFragment implements NavigatorAdapter.T
 
     @Override
     public void onCategoryListError(int code, String msg) {
-        setState(StateView.STATE_ERROR);
+        if(StateView.STATE_ERROR != getState()){
+            setState(StateView.STATE_ERROR);
+            return;
+        }
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 

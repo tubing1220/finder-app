@@ -26,6 +26,7 @@ public class StateView extends LinearLayout implements View.OnClickListener {
     public static final int STATE_LOADDING = 2;
     public static final int STATE_ERROR = 3;
     public static final int STATE_OK = 4;
+    private int mState;
 
     private Callback mCallback;
 
@@ -52,6 +53,7 @@ public class StateView extends LinearLayout implements View.OnClickListener {
 
     public void setState(int state, View continerView){
         removeAllViews();
+        mState = state;
         switch (state){
             case STATE_EMPTY:
                 setVisibility(View.VISIBLE);
@@ -75,6 +77,10 @@ public class StateView extends LinearLayout implements View.OnClickListener {
                 continerView.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    public int getState(){
+        return mState;
     }
 
     @Override

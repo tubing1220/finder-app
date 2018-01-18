@@ -134,7 +134,7 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
         CategoryDetail nowFirst = mAdapter.getData().get(0);
         CategoryDetail newFirst = categoryDetailList.get(0);
         if(nowFirst.getId().equals(newFirst.getId())){
-            Toast.makeText(getContext(), "已是最新内容", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.newest_ontent_text, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -146,16 +146,19 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
 
     @Override
     public void onCategoryDetailError(int code, String msg) {
-        if(CollectionUtils.isEmpty(mAdapter.getData())){
-            if(NetworkUtils.isConnected(getContext())){
-                setState(StateView.STATE_EMPTY);
-            } else{
-                setState(StateView.STATE_ERROR);
-            }
-        } else{
+        if(!CollectionUtils.isEmpty(mAdapter.getData())){
+            mAdapter.loadMoreEnd();
+            Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(StateView.STATE_EMPTY == getState() || StateView.STATE_ERROR == getState()){
             Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
         }
-        mAdapter.loadMoreEnd();
+        if(NetworkUtils.isConnected(getContext())){
+            setState(StateView.STATE_EMPTY);
+        } else{
+            setState(StateView.STATE_ERROR);
+        }
     }
 
     @Override
