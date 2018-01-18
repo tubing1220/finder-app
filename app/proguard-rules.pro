@@ -71,3 +71,18 @@
 -keep class retrofit2.** { *; }
 -dontwarn retrofit2.**
 
+#for gson
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.** {*;}
+-dontwarn com.google.gson.**
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+-keep class com.zjf.finder.biz.home.model.** {*;}
+-keep class com.zjf.finder.biz.home.service.** {*;}
+-keep class com.zjf.finder.base.http.Result** {*;}
+-keep interface com.zjf.finder.biz.home.contract.** {*;}
+-keep interface com.zjf.finder.biz.home.interfaces.*{*;}
