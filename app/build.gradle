@@ -16,6 +16,56 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file("../release.jks")
+            storePassword "com.zjf.finder2018"
+            keyAlias "finder"
+            keyPassword "com.zjf.finder2018"
+            v2SigningEnabled false
+        }
+        release {
+            storeFile file("../release.jks")
+            storePassword "com.zjf.finder2018"
+            keyAlias "finder"
+            keyPassword "com.zjf.finder2018"
+            v2SigningEnabled false
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.debug
+
+        }
+        release {
+            minifyEnabled true
+            shrinkResources false
+            debuggable false
+            jniDebuggable false
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles 'proguard-rules.pro'
+        }
+        preview {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.debug
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {

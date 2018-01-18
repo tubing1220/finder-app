@@ -19,5 +19,55 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-ignorewarnings
+
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
+# ButterKnife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+#BaseRecyclerViewAdapterHelper
+-keep class com.chad.library.** {*;}
+-dontwarn com.chad.librar
+
+#for okhttp
+-dontwarn okhttp3.**
+-keep class okhttp.** {*;}
+-dontwarn okio.**
+-keep class okio.** {*;}
+
+#for glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.engine.EngineJob { *; }
+-keep class com.bumptech.glide.load.engine.Engine { *; }
+
+-dontwarn okio.**
+-dontwarn retrofit2.Platform$Java8
+
+#for Retorfit
+# Platform calls Class.forName on types which do not exist on Android to determine platform.
+-dontnote retrofit2.Platform
+# Platform used when running on RoboVM on iOS. Will not be used at runtime.
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+# Platform used when running on Java 8 VMs. Will not be used at runtime.
+-dontwarn retrofit2.Platform$Java8
+# Retain generic type information for use by reflection by converters and adapters.
+-keepattributes Signature
+# Retain declared checked exceptions for use by a Proxy instance.
+-keepattributes Exceptions
+-keep class retrofit2.** { *; }
+-dontwarn retrofit2.**
+
