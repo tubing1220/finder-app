@@ -56,7 +56,8 @@ public class StateView extends LinearLayout implements View.OnClickListener {
             case STATE_EMPTY:
                 setVisibility(View.VISIBLE);
                 continerView.setVisibility(View.GONE);
-                LayoutInflater.from(getContext()).inflate(R.layout.layout_state_empty, this, true);
+                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.layout_state_empty, this, true);
+                emptyView.findViewById(R.id.try_again_btn).setOnClickListener(this);
                 break;
             case STATE_LOADDING:
                 setVisibility(View.VISIBLE);
