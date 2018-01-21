@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/layout_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/close_btn"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/close_img"
+            android:scaleType="centerCrop"
+            android:layout_alignParentLeft="true"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/wechat_login_btn"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:src="@drawable/wechat_login_img"
+        android:scaleType="centerCrop"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

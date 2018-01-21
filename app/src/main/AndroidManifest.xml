@@ -57,6 +57,10 @@
         <meta-data
             android:name="com.zjf.finder.base.glide.OKHttpGlideModule"
             android:value="GlideModule" />
+
+        <activity
+            android:name=".biz.login.ui.LoginActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

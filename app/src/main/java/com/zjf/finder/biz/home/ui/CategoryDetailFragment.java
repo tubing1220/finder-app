@@ -21,6 +21,7 @@ import com.zjf.finder.biz.home.interfaces.CategoryItem;
 import com.zjf.finder.biz.home.model.Category;
 import com.zjf.finder.biz.home.model.CategoryDetail;
 import com.zjf.finder.biz.home.presenter.CategoryDetailPresenter;
+import com.zjf.finder.biz.login.ui.LoginActivity;
 import com.zjf.finder.constant.Constant;
 import com.zjf.finder.utils.CollectionUtils;
 import com.zjf.finder.utils.NetworkUtils;
@@ -90,11 +91,12 @@ public class CategoryDetailFragment extends BaseFragment implements BaseQuickAda
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if(mAdapter != null && CollectionUtils.isValid(mAdapter.getData(), position)){
-                    CategoryDetail categoryDetailItem = mAdapter.getData().get(position);
-                    String url = categoryDetailItem.getOriginalUrl();
-                    String headerUrl = categoryDetailItem.getHeaderUrl();
-                    String username = categoryDetailItem.getName();
-                    CommonWebViewActivity.start(getActivity(), url, headerUrl, username);
+//                    CategoryDetail categoryDetailItem = mAdapter.getData().get(position);
+//                    String url = categoryDetailItem.getOriginalUrl();
+//                    String headerUrl = categoryDetailItem.getHeaderUrl();
+//                    String username = categoryDetailItem.getName();
+//                    CommonWebViewActivity.start(getActivity(), url, headerUrl, username);
+                    LoginActivity.start(getActivity());
                 }
             }
         });

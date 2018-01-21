@@ -35,6 +35,10 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomTo
         ButterKnife.bind(this);
     }
 
+    public void setCustomToolBarVisiable(boolean isVisiable){
+        mCustomToolBar.setVisibility(isVisiable ? View.VISIBLE : View.GONE);
+    }
+
     public CustomToolBar getCustomToolBar(){
         return mCustomToolBar;
     }
