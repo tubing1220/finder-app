@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -104,13 +105,12 @@ public class CommonWebViewActivity extends BaseActivity {
     };
 
     @Override
-    public void onBackPressed() {
-//        Uri uri = getIntent().getData();
-//        if (uri != null && TextUtils.equals(UriParamQueryUtils.getStringQueryParameter(uri, ProtocolKey.Push.IS_FROM_PUSH), ProtocolKey.Push.IS_FROM_PUSH)) {
-//            Intent intent = new Intent(CommonWebViewActivity.this, MainActivity.class);
-//            startActivity(intent);
-//        }
-
-        CommonWebViewActivity.this.finish();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && mWebview != null && mWebview.canGoBack()){
+            mWebview.goBack();
+        } else{
+            CommonWebViewActivity.this.finish();
+        }
+        return true;
     }
 }
